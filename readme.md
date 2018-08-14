@@ -23,3 +23,4 @@ W folderze ```js``` znajdziesz 3 pliki:
 
 Twoim zadaniem jest połączenie plików w taki sposób, aby Square widział Polygon, a plik app.js widział klasę Square.
 Tak, aby plik wyjściowy ```out.js``` nie wywoływał błędów w konsoli.
+# banner-game
