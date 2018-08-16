@@ -70,92 +70,68 @@
 "use strict";
 
 
-var _square = __webpack_require__(1);
-
-var square = new _square.Square(2);
-square.sayName();
-console.log(square.area());
-console.log(new _square.Square().area());
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Square = undefined;
-
-var _polygon = __webpack_require__(2);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Square = function (_Polygon) {
-  _inherits(Square, _Polygon);
-
-  function Square() {
-    var dim = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
-
-    _classCallCheck(this, Square);
-
-    var _this = _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).call(this, dim, dim));
-
-    _this.name = 'Square';
-    return _this;
-  }
-
-  return Square;
-}(_polygon.Polygon);
-
-exports.Square = Square;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Polygon = function () {
-  function Polygon(height, width) {
-    _classCallCheck(this, Polygon);
+// function move() {
+//     var elem = document.getElementById("myBar");
+//     var width = 1;
+//     var id = setInterval(frame, 10);
+//     function frame() {
+//         if (width >= 100) {
+//             clearInterval(id);
+//         } else {
+//             width++;
+//             elem.style.width = width + '%';
+//         }
+//     }
+// }
 
-    this.name = 'Polygon';
-    this.height = height;
-    this.width = width;
+var PAIR_GROUPS = [['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow'], ['picasso', 'dali', 'gogh'], ['football', 'basketball', 'baseball']];
+
+var Game = function () {
+  function Game() {
+    _classCallCheck(this, Game);
+
+    this.lives = 3;
+    this.index = 0;
+    this.playTime = 20;
   }
 
-  _createClass(Polygon, [{
-    key: 'area',
-    value: function area() {
-      return this.height * this.width;
+  _createClass(Game, [{
+    key: 'startGame',
+    value: function startGame() {}
+  }, {
+    key: 'renderNewRound',
+    value: function renderNewRound() {}
+  }, {
+    key: 'checkMove',
+    value: function checkMove() {}
+  }, {
+    key: 'checkEndGame',
+    value: function checkEndGame() {
+      if (this.lives === 0 || this.playTime === 0) {
+        this.endGame();
+      }
     }
   }, {
-    key: 'sayName',
-    value: function sayName() {
-      console.log('Cześć jestem', this.name + '.');
+    key: 'endGame',
+    value: function endGame() {
+      console.log('game end');
     }
   }]);
 
-  return Polygon;
+  return Game;
 }();
 
-exports.Polygon = Polygon;
+var newGame = new Game();
+
+setTimeout(function () {
+  newGame.endGame();
+}, 3000);
+
+//addeventlistener, game.checkMove
 
 /***/ })
 /******/ ]);
