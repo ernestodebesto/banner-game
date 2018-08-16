@@ -73,6 +73,14 @@
   width: 150px;
 }
 
+.active {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 
 /* sets of images */
 .cow {

@@ -12,12 +12,20 @@
 //     }
 // }
 
-const PAIR_GROUPS = [ ['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow'], ['picasso', 'dali', 'gogh'], ['football', 'basketball', 'baseball'] ]
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+const PAIR_GROUPS = [['football', 'basketball', 'baseball'],['picasso', 'dali', 'gogh'] ,  ['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow']]
 
 class Game {
   constructor(){
     this.lives = 3;
-    this.index = 0;
+    this.index = 1;
     this.playTime = 20;
   }
 
@@ -26,7 +34,20 @@ class Game {
   }
 
   renderNewRound() {
+    const imageContainers = document.querySelectorAll('.image-container');
+    const wordContainers = document.querySelectorAll('.body__word-field p')
 
+    const toDisplayGroup = PAIR_GROUPS[this.index];
+    const shuffledWords = toDisplayGroup.slice();
+    shuffle(shuffledWords);
+
+    toDisplayGroup.forEach( (group, index) => {
+      const imageContainer = imageContainers[index];
+      const wordContainer = wordContainers[index];
+
+      imageContainer.classList.add(toDisplayGroup[index]);
+      wordContainer.innerHTML = shuffledWords[index];
+    })
   }
 
   checkMove () {
@@ -46,7 +67,12 @@ class Game {
 
 var newGame = new Game()
 
+newGame.renderNewRound();
+
+
 setTimeout(function(){ newGame.endGame() }, 3000);
+
+
 
 //addeventlistener, game.checkMove
 

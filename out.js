@@ -88,14 +88,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //     }
 // }
 
-var PAIR_GROUPS = [['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow'], ['picasso', 'dali', 'gogh'], ['football', 'basketball', 'baseball']];
+function shuffle(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+var PAIR_GROUPS = [['football', 'basketball', 'baseball'], ['picasso', 'dali', 'gogh'], ['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow']];
 
 var Game = function () {
   function Game() {
     _classCallCheck(this, Game);
 
     this.lives = 3;
-    this.index = 0;
+    this.index = 1;
     this.playTime = 20;
   }
 
@@ -104,7 +114,22 @@ var Game = function () {
     value: function startGame() {}
   }, {
     key: 'renderNewRound',
-    value: function renderNewRound() {}
+    value: function renderNewRound() {
+      var imageContainers = document.querySelectorAll('.image-container');
+      var wordContainers = document.querySelectorAll('.body__word-field p');
+
+      var toDisplayGroup = PAIR_GROUPS[this.index];
+      var shuffledWords = toDisplayGroup.slice();
+      shuffle(shuffledWords);
+
+      toDisplayGroup.forEach(function (group, index) {
+        var imageContainer = imageContainers[index];
+        var wordContainer = wordContainers[index];
+
+        imageContainer.classList.add(toDisplayGroup[index]);
+        wordContainer.innerHTML = shuffledWords[index];
+      });
+    }
   }, {
     key: 'checkMove',
     value: function checkMove() {}
@@ -126,6 +151,8 @@ var Game = function () {
 }();
 
 var newGame = new Game();
+
+newGame.renderNewRound();
 
 setTimeout(function () {
   newGame.endGame();
