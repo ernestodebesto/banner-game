@@ -1,12 +1,12 @@
 .banner {
-  height: 800px;
-  width: 450px;
+  height: 50em;
+  width: 28em;
   background-image: url('../img/background.png');
   background-size: cover;
 }
 
 .container {
-  width: 400px;
+  width: 25em;
   margin: 0 auto;
 }
 
@@ -18,9 +18,9 @@
 .header__heart--full {
   background-image: url('../img/life.png');
   background-size: cover;
-  height: 22px;
-  width: 25px;
-  margin-left: 5px;
+  height: 1.375em;
+  width: 1.56em;
+  margin-left: 0.313em;
 }
 
 .header__timing-row {
@@ -64,4 +64,65 @@
   background-size: cover;
   height: 60px;
   width: 150px;
+  text-align: center;
+}
+
+.image-container {
+  background-size: cover;
+  height: 185px;
+  width: 150px;
+}
+
+
+/* sets of images */
+.cow {
+  background-image: url('../img/cow.png');
+}
+
+.sheep {
+  background-image: url('../img/sheep.png');
+}
+
+.pig {
+  background-image: url('../img/pig.png');
+}
+
+.baseball {
+  background-image: url('../img/baseball.png');
+}
+
+.basketball {
+  background-image: url('../img/basketball.png');
+}
+
+.football {
+  background-image: url('../img/football.png');
+}
+
+.gogh {
+  background-image: url('../img/gogh.png');
+}
+
+.picasso {
+  background-image: url('../img/picasso.png');
+}
+
+.dali {
+  background-image: url('../img/dali.png');
+}
+
+.mozart {
+  background-image: url('../img/mozart.png');
+}
+
+.chopin {
+  background-image: url('../img/chopin.png');
+}
+
+.africa {
+  background-image: url('../img/africa.png');
+}
+
+.asia {
+  background-image: url('../img/asia.png');
 }
