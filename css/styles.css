@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .banner {
   height: 50em;
   width: 28em;
@@ -17,6 +21,14 @@
 
 .header__heart--full {
   background-image: url('../img/life.png');
+  background-size: cover;
+  height: 1.375em;
+  width: 1.56em;
+  margin-left: 0.313em;
+}
+
+.header__heart--empty {
+  background-image: url('../img/life_empty.png');
   background-size: cover;
   height: 1.375em;
   width: 1.56em;
@@ -83,17 +95,7 @@
 
 
 /* sets of images */
-.cow {
-  background-image: url('../img/cow.png');
-}
 
-.sheep {
-  background-image: url('../img/sheep.png');
-}
-
-.pig {
-  background-image: url('../img/pig.png');
-}
 
 .baseball {
   background-image: url('../img/baseball.png');
@@ -119,6 +121,18 @@
   background-image: url('../img/dali.png');
 }
 
+.cow {
+  background-image: url('../img/cow.png');
+}
+
+.sheep {
+  background-image: url('../img/sheep.png');
+}
+
+.pig {
+  background-image: url('../img/pig.png');
+}
+
 .mozart {
   background-image: url('../img/mozart.png');
 }
@@ -133,4 +147,25 @@
 
 .asia {
   background-image: url('../img/asia.png');
+}
+
+.image-border {
+  border: 6px solid black;
+}
+
+#myProgress {
+  width: 80%;
+  height: 14px;
+  position: relative;
+}
+
+#myBar {
+  background-color: #B6534F  ;
+  width: 10px;
+  height: 10px;
+  /* position: absolute; */
+}
+
+.barBorder {
+  border: 2px solid #B6534F;
 }
