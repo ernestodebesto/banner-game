@@ -20,13 +20,19 @@ function shuffle(a) {
     return a;
 }
 
-const PAIR_GROUPS = [['football', 'basketball', 'baseball'],['picasso', 'dali', 'gogh'] ,  ['chopin', 'mozart'], ['africa', 'asia'], ['pig', 'sheep', 'cow']]
+const PAIR_GROUPS = [
+  ['football', 'basketball', 'baseball'],
+  ['picasso', 'dali', 'gogh'],
+  ['chopin', 'mozart'],
+  ['africa', 'asia'],
+  ['pig', 'sheep', 'cow'] ]
 
 class Game {
   constructor(){
     this.lives = 3;
-    this.index = 1;
+    this.currentIndex = 1;
     this.playTime = 20;
+    this.selected = null;
   }
 
   startGame() {
@@ -34,20 +40,65 @@ class Game {
   }
 
   renderNewRound() {
-    const imageContainers = document.querySelectorAll('.image-container');
-    const wordContainers = document.querySelectorAll('.body__word-field p')
+    //dom elements
+    const imageContainers = $('.image-container');
+    const wordContainers = $('.body__word-field');
 
-    const toDisplayGroup = PAIR_GROUPS[this.index];
+    const toDisplayGroup = PAIR_GROUPS[this.currentIndex];
+
     const shuffledWords = toDisplayGroup.slice();
     shuffle(shuffledWords);
+    // const groupCount = toDisplayGroup.length; TODO later
+
+
 
     toDisplayGroup.forEach( (group, index) => {
       const imageContainer = imageContainers[index];
       const wordContainer = wordContainers[index];
 
       imageContainer.classList.add(toDisplayGroup[index]);
-      wordContainer.innerHTML = shuffledWords[index];
+      imageContainer.dataset.name = toDisplayGroup[index];
+      //add to dataset
+      wordContainer.lastElementChild.innerHTML = shuffledWords[index];
+      imageContainer.addEventListener('click', () => {
+        this.toggleBorder(imageContainer);
+        this.selected = imageContainer.dataset.name;
+      })
+
+      wordContainer.addEventListener('click', () => {
+        if (this.selected) {
+          this.checkPair(wordContainer)
+        }
+      })
+
+      // imageContainer.addEventListener('mousedown', (e) => {
+      //   console.log(e.target.dataset.name);
+      // });
+      //
+      // document.addEventListener('mouseup', (e) => {
+      //   console.log(e.target);
+      // })
+
     })
+  }
+
+  checkPair(element) {
+    const word = element.lastElementChild.innerHTML;
+    if (this.selected === word) {
+      console.log('mamy parke');
+    }
+  }
+
+  toggleBorder(element) {
+    if (this.selected && element.dataset.name !== this.selected) {
+      const imageContainers = $('.image-container');
+      for (let container of imageContainers) {
+        if (container.dataset.name === this.selected) {
+          container.style.border = 'none';
+        }
+      }
+    }
+    element.style.border = '7px solid black'
   }
 
   checkMove () {
@@ -70,7 +121,7 @@ var newGame = new Game()
 newGame.renderNewRound();
 
 
-setTimeout(function(){ newGame.endGame() }, 3000);
+setTimeout(function(){ newGame.endGame() }, 20000);
 
 
 

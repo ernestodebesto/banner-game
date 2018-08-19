@@ -105,8 +105,9 @@ var Game = function () {
     _classCallCheck(this, Game);
 
     this.lives = 3;
-    this.index = 1;
+    this.currentIndex = 1;
     this.playTime = 20;
+    this.selected = null;
   }
 
   _createClass(Game, [{
@@ -115,20 +116,88 @@ var Game = function () {
   }, {
     key: 'renderNewRound',
     value: function renderNewRound() {
-      var imageContainers = document.querySelectorAll('.image-container');
-      var wordContainers = document.querySelectorAll('.body__word-field p');
+      var _this = this;
 
-      var toDisplayGroup = PAIR_GROUPS[this.index];
+      //dom elements
+      var imageContainers = $('.image-container');
+      var wordContainers = $('.body__word-field');
+
+      var toDisplayGroup = PAIR_GROUPS[this.currentIndex];
+
       var shuffledWords = toDisplayGroup.slice();
       shuffle(shuffledWords);
+      // const groupCount = toDisplayGroup.length; TODO later
+
 
       toDisplayGroup.forEach(function (group, index) {
         var imageContainer = imageContainers[index];
         var wordContainer = wordContainers[index];
 
         imageContainer.classList.add(toDisplayGroup[index]);
-        wordContainer.innerHTML = shuffledWords[index];
+        imageContainer.dataset.name = toDisplayGroup[index];
+        //add to dataset
+        wordContainer.lastElementChild.innerHTML = shuffledWords[index];
+        imageContainer.addEventListener('click', function () {
+          _this.toggleBorder(imageContainer);
+          _this.selected = imageContainer.dataset.name;
+        });
+
+        wordContainer.addEventListener('click', function () {
+          if (_this.selected) {
+            _this.checkPair(wordContainer);
+          }
+        });
+
+        // imageContainer.addEventListener('mousedown', (e) => {
+        //   console.log(e.target.dataset.name);
+        // });
+        //
+        // document.addEventListener('mouseup', (e) => {
+        //   console.log(e.target);
+        // })
       });
+    }
+  }, {
+    key: 'checkPair',
+    value: function checkPair(element) {
+      var word = element.lastElementChild.innerHTML;
+      if (this.selected === word) {
+        console.log('mamy parke');
+      }
+    }
+  }, {
+    key: 'toggleBorder',
+    value: function toggleBorder(element) {
+      if (this.selected && element.dataset.name !== this.selected) {
+        var imageContainers = $('.image-container');
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = imageContainers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var container = _step.value;
+
+            if (container.dataset.name === this.selected) {
+              container.style.border = 'none';
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+      element.style.border = '7px solid black';
     }
   }, {
     key: 'checkMove',
@@ -156,7 +225,7 @@ newGame.renderNewRound();
 
 setTimeout(function () {
   newGame.endGame();
-}, 3000);
+}, 20000);
 
 //addeventlistener, game.checkMove
 
